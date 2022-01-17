@@ -1,0 +1,63 @@
+dotnet --version
+dotnet --list-sdks
+
+
+- Criar o globaljason do projeto
+dotnet new globaljson --sdk-version 3.1.416
+
+- Criar um projeto web api
+dotnet new webapi -n Investimento.API
+
+- Criar um projeto de dominio
+dotnet new classlib -n Investimento.Domain
+
+- Criar um projeto de dados(Repositórios)
+dotnet new classlib -n Investimento.Data
+
+- Criar uma solução do projeto
+dotnet new sln -n Investimento
+
+- Adicionar os projetos para dentro da solução
+dotnet sln Investimento.sln add Investimento.API
+dotnet sln Investimento.sln add Investimento.Domain
+dotnet sln Investimento.sln add Investimento.Data
+
+- Para dar um builder na solução, tem que estar na pasta da solução
+dotnet restore
+
+- Adicionar referências dos projetos
+dotnet add Investimento.API reference Investimento.Data
+dotnet add Investimento.API reference Investimento.Domain
+dotnet add Investimento.Data reference Investimento.Domain
+
+
+- Rodar um projeto e ficar escutando
+dotnet watch run -p Investimento.API
+
+- Rodar um projeto normal
+dotnet run -p Investimento.API
+
+- Instalar dotnet EF
+dotnet tool install --global dotnet-EF
+
+- Para instalar alguns pacotes no projeto, direto no csproj
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+  </ItemGroup>
+
+
+- Instalar no projeto o EF Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.SQLit
+
+
+- Para criar nossas migrations do EntityFrameworkCore
+dotnet ef migrations add inicial
+
+- PaRA criar o banco de dados referente a migration 
+dotnet ef database update
+dotnet ef database drop
+
+

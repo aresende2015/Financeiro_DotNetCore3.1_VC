@@ -1,0 +1,9 @@
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\bin\Debug\netstandard2.0\Investimento.Domain.deps.json
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\bin\Debug\netstandard2.0\Investimento.Domain.dll
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\bin\Debug\netstandard2.0\Investimento.Domain.pdb
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.csprojAssemblyReference.cache
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.AssemblyInfoInputs.cache
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.AssemblyInfo.cs
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.csproj.CoreCompileInputs.cache
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.dll
+C:\projetos\API_ASP_NET_CORE_EF_CORE_VC\back\src\Investimento.Domain\obj\Debug\netstandard2.0\Investimento.Domain.pdb

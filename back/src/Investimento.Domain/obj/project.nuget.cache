@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "K1GXi0vCb9JW+9rngUlxxztOmQPeeBT02ugNwCdBwqxgJXKnM1n7Kto5Tl0JffgxqhUx4NNojOxPvDp+8AVksA==",
+  "success": true,
+  "projectFilePath": "C:\\projetos\\API_ASP_NET_CORE_EF_CORE_VC\\back\\src\\Investimento.Domain\\Investimento.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alexq\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\alexq\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
