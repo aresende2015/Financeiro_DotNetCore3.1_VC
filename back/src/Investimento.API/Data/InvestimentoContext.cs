@@ -57,8 +57,8 @@ namespace Investimento.API.Data
                 builder.Entity<Cliente>()
                 .HasData(
                     new List<Cliente>(){
-                        new Cliente(1, "Alex Quintes de Resende", DateTime.Now, true),
-                        new Cliente(2, "Caio Resende", DateTime.Now, true)
+                        new Cliente(1, "Alex", DateTime.Now, true),
+                        new Cliente(2, "Caio", DateTime.Now, true)
                     }
                 );
 
