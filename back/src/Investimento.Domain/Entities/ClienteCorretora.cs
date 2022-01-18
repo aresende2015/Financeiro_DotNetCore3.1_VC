@@ -1,4 +1,4 @@
-namespace Investimento.API.Models
+namespace Investimento.Domain.Entities
 {
     public class ClienteCorretora
     {

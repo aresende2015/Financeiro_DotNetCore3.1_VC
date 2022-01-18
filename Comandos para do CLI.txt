@@ -53,11 +53,11 @@ dotnet tool install --global dotnet-EF
 dotnet add package Microsoft.EntityFrameworkCore.SQLit
 
 
-- Para criar nossas migrations do EntityFrameworkCore
-dotnet ef migrations add inicial
+- Para criar nossas migrations do EntityFrameworkCore, rodar dentro da pasta da solução
+dotnet ef migrations add inicial -p Investimento.Data -s Investimento.API 
 
-- PaRA criar o banco de dados referente a migration 
-dotnet ef database update
+- PaRA criar o banco de dados referente a migration, rodar dentro da pasta da solução
+dotnet ef database update -s Investimento.API
 dotnet ef database drop
 
 

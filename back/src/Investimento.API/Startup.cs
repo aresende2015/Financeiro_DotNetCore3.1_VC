@@ -2,7 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Investimento.API.Data;
+using Investimento.Data.Context;
+using Investimento.Data.Repositories;
+using Investimento.Domain.Interfaces.Repositories;
+using Investimento.Domain.Interfaces.Services;
+using Investimento.Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +34,10 @@ namespace Investimento.API
             services.AddDbContext<InvestimentoContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
+
+            services.AddScoped<IClasseDeAtivoRepo, ClasseDeAtivoRepo>();
+            services.AddScoped<IGeralRepo, GeralRepo>();
+            services.AddScoped<IClasseDeAtivoService, ClasseDeAtivoService>();
 
             services.AddControllers();
             // services.AddSwaggerGen(c =>
