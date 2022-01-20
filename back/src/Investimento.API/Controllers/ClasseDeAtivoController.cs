@@ -27,7 +27,7 @@ namespace Investimento.API.Controllers
         {
             try
             {
-                 var classeDeAtivos = await _classeDeAtivoService.PegarTodasClassesDeAtivosAsync();
+                 var classeDeAtivos = await _classeDeAtivoService.GetAllClassesDeAtivosAsync();
                  if (classeDeAtivos == null) return NoContent();                 
 
                  return Ok(classeDeAtivos);
@@ -45,7 +45,7 @@ namespace Investimento.API.Controllers
         {
             try
             {
-                 var classeDeAtivo = await _classeDeAtivoService.PegarClasseDeAtivoPorIdAsync(id);
+                 var classeDeAtivo = await _classeDeAtivoService.GetClasseDeAtivoByIdAsync(id);
                  if (classeDeAtivo == null) return NoContent();                 
 
                  return Ok(classeDeAtivo);
@@ -57,9 +57,7 @@ namespace Investimento.API.Controllers
                     $"Erro ao tentar recuperar a Classe de Ativo com id ${id}. Erro: {ex.Message}");
             }
         }
-
-
-
+        
         [HttpPost]
         public async Task<IActionResult> Post(ClasseDeAtivo model) 
         {
@@ -103,7 +101,7 @@ namespace Investimento.API.Controllers
         {
             try
             {
-                var classeDeAtivo = await _classeDeAtivoService.PegarClasseDeAtivoPorIdAsync(id);
+                var classeDeAtivo = await _classeDeAtivoService.GetClasseDeAtivoByIdAsync(id);
                 if (classeDeAtivo == null)
                     StatusCode(StatusCodes.Status409Conflict,
                         "Você está tetando deletar a Classe de Ativo que não existe.");

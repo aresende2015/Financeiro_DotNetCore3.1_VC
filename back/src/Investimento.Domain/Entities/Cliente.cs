@@ -5,7 +5,11 @@ namespace Investimento.Domain.Entities
 {
     public class Cliente
     {
-        public Cliente() { }
+        public Cliente() 
+        {
+            DataDeCriacao = DateTime.Now;
+            Inativo = false;
+        }
 
         public Cliente(int id, string descricao) 
         {
@@ -21,6 +25,14 @@ namespace Investimento.Domain.Entities
                 Inativo = true;
             else
                 throw new Exception($"O Cliente já estava inativo.");
+        }
+
+        public void Reativar()
+        {
+            if (!Inativo)
+                Inativo = false;
+            else
+                throw new Exception($"O Cliente já estava ativo.");
         }
         public int Id { get; set; }
 

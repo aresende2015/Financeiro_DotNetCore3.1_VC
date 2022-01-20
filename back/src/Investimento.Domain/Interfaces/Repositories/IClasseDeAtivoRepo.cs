@@ -8,8 +8,9 @@ namespace Investimento.Domain.Interfaces.Repositories
 {
     public interface IClasseDeAtivoRepo : IGeralRepo
     {
-        Task<ClasseDeAtivo[]> PegaTodasAsync();        
-        Task<ClasseDeAtivo> PegaPorIdAsync(int id);
-        Task<ClasseDeAtivo> PegaPorDescricaoAsync(string descricao);
+        Task<ClasseDeAtivo[]> GetAllClasseDeAtivosAsync(bool includeAtivos = false);  
+        Task<ClasseDeAtivo[]> GetAllClasseDeAtivosByAtivoId(int ativoId, bool includeAtivos = false);      
+        Task<ClasseDeAtivo> GetClasseDeAtivoByIdAsync(int id, bool includeAtivos = false);
+        Task<ClasseDeAtivo> GetClasseDeAtivoByDescricaoAsync(string descricao);
     }
 }

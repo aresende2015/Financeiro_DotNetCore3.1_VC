@@ -17,7 +17,7 @@ namespace Investimento.Data.Repositories
         {
             _context = context;
         }
-        public async Task<ClasseDeAtivo> PegaPorDescricaoAsync(string descricao)
+        public async Task<ClasseDeAtivo> GetClasseDeAtivoByDescricaoAsync(string descricao)
         {
             IQueryable<ClasseDeAtivo> query = _context.ClasseDeAtivos;
 
@@ -27,9 +27,12 @@ namespace Investimento.Data.Repositories
             return await query.FirstOrDefaultAsync(ca => ca.Descricao == descricao);
         }
 
-        public async Task<ClasseDeAtivo> PegaPorIdAsync(int id)
+        public async Task<ClasseDeAtivo> GetClasseDeAtivoByIdAsync(int id, bool includeAtivos = false)
         {
             IQueryable<ClasseDeAtivo> query = _context.ClasseDeAtivos;
+
+            if (includeAtivos)
+                query = query.Include(cAtivo => cAtivo.Ativos);
 
             query = query.AsNoTracking()
                          .OrderBy(ca => ca.Id)
@@ -38,12 +41,29 @@ namespace Investimento.Data.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<ClasseDeAtivo[]> PegaTodasAsync()
+        public async Task<ClasseDeAtivo[]> GetAllClasseDeAtivosAsync(bool includeAtivos = false)
         {
             IQueryable<ClasseDeAtivo> query = _context.ClasseDeAtivos;
 
+            if (includeAtivos)
+                query = query.Include(cAtivo => cAtivo.Ativos);
+
             query = query.AsNoTracking()
                          .OrderBy(ca => ca.Id);
+
+            return await query.ToArrayAsync();
+        }
+
+        public async Task<ClasseDeAtivo[]> GetAllClasseDeAtivosByAtivoId(int ativoId, bool includeAtivos = false)
+        {
+            IQueryable<ClasseDeAtivo> query = _context.ClasseDeAtivos;
+
+            if (includeAtivos)
+                query = query.Include(cAtivo => cAtivo.Ativos);
+
+            query = query.AsNoTracking()
+                         .OrderBy(ca => ca.Id)
+                         .Where(ca => ca.Ativos.Any(a => a.Id == ativoId));
 
             return await query.ToArrayAsync();
         }

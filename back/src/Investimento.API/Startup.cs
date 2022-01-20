@@ -23,23 +23,30 @@ namespace Investimento.API
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<InvestimentoContext>(
-                context => context.UseSqlite(Configuration.GetConnectionString("Default"))
+                context => context.UseSqlite(_configuration.GetConnectionString("Default"))
             );
 
             services.AddScoped<IClasseDeAtivoRepo, ClasseDeAtivoRepo>();
+            services.AddScoped<IAtivoRepo, AtivoRepo>();
             services.AddScoped<IGeralRepo, GeralRepo>();
             services.AddScoped<IClasseDeAtivoService, ClasseDeAtivoService>();
+            services.AddScoped<IAtivoService, AtivoService>();
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(
+                        opt => opt.SerializerSettings.ReferenceLoopHandling =
+                           Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
+                    
             // services.AddSwaggerGen(c =>
             // {
             //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Investimento.API", Version = "v1" });

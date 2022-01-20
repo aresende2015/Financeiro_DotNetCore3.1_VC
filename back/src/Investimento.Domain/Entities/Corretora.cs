@@ -5,7 +5,11 @@ namespace Investimento.Domain.Entities
 {
     public class Corretora
     {
-        public Corretora() { }
+        public Corretora() 
+        {
+            DataDeCriacao = DateTime.Now;
+            Inativo = false; 
+        }
 
         public Corretora(int id, string descricao) 
         {
@@ -21,6 +25,14 @@ namespace Investimento.Domain.Entities
                 Inativo = true;
             else
                 throw new Exception($"A Corretora já estava inativa.");
+        }
+
+        public void Reativar()
+        {
+            if (!Inativo)
+                Inativo = false;
+            else
+                throw new Exception($"A Corretora já estava ativa.");
         }
          public int Id { get; set; }
 

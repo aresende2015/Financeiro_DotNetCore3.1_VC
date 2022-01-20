@@ -13,8 +13,9 @@ namespace Investimento.Domain.Interfaces.Services
 
         Task<bool> DeletarClasseDeAtivo(int classeDeAtivoId);
         Task<bool> InativarClasseDeAtivo(ClasseDeAtivo model);
+        Task<bool> ReativarClasseDeAtivo(ClasseDeAtivo model);
 
-        Task<ClasseDeAtivo[]> PegarTodasClassesDeAtivosAsync();
-        Task<ClasseDeAtivo> PegarClasseDeAtivoPorIdAsync(int classeDeAtivoId);
+        Task<ClasseDeAtivo[]> GetAllClassesDeAtivosAsync();
+        Task<ClasseDeAtivo> GetClasseDeAtivoByIdAsync(int classeDeAtivoId);
     }
 }

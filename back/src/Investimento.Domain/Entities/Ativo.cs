@@ -4,7 +4,11 @@ namespace Investimento.Domain.Entities
 {
     public class Ativo
     {
-        public Ativo() { }
+        public Ativo() 
+        {
+            DataDeCriacao = DateTime.Now;
+            Inativo = false;
+        }
 
         public Ativo(int id, string descricao, int classeDeAtivoId) 
         {
@@ -21,6 +25,14 @@ namespace Investimento.Domain.Entities
                 Inativo = true;
             else
                 throw new Exception($"O Ativo já estava inativo.");
+        }
+
+        public void Reativar()
+        {
+            if (!Inativo)
+                Inativo = false;
+            else
+                throw new Exception($"O Ativo já estava ativo.");
         }
 
         public int Id { get; set; }

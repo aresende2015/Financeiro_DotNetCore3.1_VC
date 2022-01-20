@@ -18,10 +18,13 @@ namespace Investimento.Domain.Services
         }
         public async Task<ClasseDeAtivo> AdicionarClasseDeAtivo(ClasseDeAtivo model)
         {
-            if (await _classeDeAtivoRepo.PegaPorDescricaoAsync(model.Descricao) != null)
+            if (model.Inativo)
+                throw new Exception("Não é possível incluir uma Classe de Ativo já inativa.");
+
+            if (await _classeDeAtivoRepo.GetClasseDeAtivoByDescricaoAsync(model.Descricao) != null)
                 throw new Exception("Já existe uma atividade com essa descrição");
 
-            if(await _classeDeAtivoRepo.PegaPorIdAsync(model.Id) == null)
+            if(await _classeDeAtivoRepo.GetClasseDeAtivoByIdAsync(model.Id) == null)
             {
                 _classeDeAtivoRepo.Adicionar(model);
                 if (await _classeDeAtivoRepo.SalvarMudancasAsync())
@@ -34,10 +37,15 @@ namespace Investimento.Domain.Services
         public async Task<ClasseDeAtivo> AtualizarClasseDeAtivo(ClasseDeAtivo model)
         {
             if (model.Inativo)
-                throw new Exception("Não se pode alterar uma Classe de Atividade inativa.");
+                throw new Exception("Não é possível atualizar uma Classe de Ativo já inativa.");
 
-            if(await _classeDeAtivoRepo.PegaPorIdAsync(model.Id) != null)
+            var cAtivo = await _classeDeAtivoRepo.GetClasseDeAtivoByIdAsync(model.Id);
+
+            if(cAtivo != null)
             {
+                if (cAtivo.Inativo)
+                    throw new Exception("Não se pode alterar uma Classe de Ativo inativa.");
+
                 _classeDeAtivoRepo.Atualizar(model);
                 if (await _classeDeAtivoRepo.SalvarMudancasAsync())
                     return model;
@@ -48,7 +56,7 @@ namespace Investimento.Domain.Services
 
         public async Task<bool> DeletarClasseDeAtivo(int classeDeAtivoId)
         {
-            var classeDeAtivo = await _classeDeAtivoRepo.PegaPorIdAsync(classeDeAtivoId);
+            var classeDeAtivo = await _classeDeAtivoRepo.GetClasseDeAtivoByIdAsync(classeDeAtivoId);
             if (classeDeAtivo == null) 
                 throw new Exception("Classe de Ativo que tentou deletar não existe.");
 
@@ -69,11 +77,23 @@ namespace Investimento.Domain.Services
             return false;
         }
 
-        public async Task<ClasseDeAtivo> PegarClasseDeAtivoPorIdAsync(int classeDeAtivoId)
+        public async Task<bool> ReativarClasseDeAtivo(ClasseDeAtivo model)
+        {
+            if (model != null)
+            {
+                model.Reativar();
+                _classeDeAtivoRepo.Atualizar<ClasseDeAtivo>(model);
+                return await _classeDeAtivoRepo.SalvarMudancasAsync();
+            }
+
+            return false;
+        }
+
+        public async Task<ClasseDeAtivo> GetClasseDeAtivoByIdAsync(int classeDeAtivoId)
         {
             try
             {
-                var classesDeAtivo = await _classeDeAtivoRepo.PegaPorIdAsync(classeDeAtivoId);
+                var classesDeAtivo = await _classeDeAtivoRepo.GetClasseDeAtivoByIdAsync(classeDeAtivoId, true);
                 if (classesDeAtivo == null) return null;
 
                 return classesDeAtivo;
@@ -84,11 +104,11 @@ namespace Investimento.Domain.Services
             }            
         }
 
-        public async Task<ClasseDeAtivo[]> PegarTodasClassesDeAtivosAsync()
+        public async Task<ClasseDeAtivo[]> GetAllClassesDeAtivosAsync()
         {
             try
             {
-                var classesDeAtivos = await _classeDeAtivoRepo.PegaTodasAsync();
+                var classesDeAtivos = await _classeDeAtivoRepo.GetAllClasseDeAtivosAsync(true);
                 if (classesDeAtivos == null) return null;
 
                 return classesDeAtivos;
