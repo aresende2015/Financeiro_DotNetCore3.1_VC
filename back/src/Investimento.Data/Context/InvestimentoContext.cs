@@ -25,9 +25,8 @@ namespace Investimento.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new AtivoMap());
-
-            builder.Entity<ClienteCorretora>()
-                .HasKey(CC => new {CC.ClienteId, CC.CorretoraId});
+            builder.ApplyConfiguration(new ClasseDeAtivoMap());
+            builder.ApplyConfiguration(new ClienteCorretoraMap());
 
             builder.Entity<ClasseDeAtivo>()
                 .HasData(
