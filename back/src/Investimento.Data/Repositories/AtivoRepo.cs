@@ -26,9 +26,12 @@ namespace Investimento.Data.Repositories
             return await query.FirstOrDefaultAsync(a => a.Descricao == descricao);
         }
 
-        public async Task<Ativo> GetAtivoByIdAsync(int id)
+        public async Task<Ativo> GetAtivoByIdAsync(int id, bool includeClasseDeAtivo = false)
         {
             IQueryable<Ativo> query = _context.Ativos;
+
+            if (includeClasseDeAtivo)
+                query = query.Include(a => a.ClasseDeAtivo);
 
             query = query.AsNoTracking()
                          .OrderBy(a => a.Id)
@@ -37,9 +40,12 @@ namespace Investimento.Data.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Ativo[]> GetAllAtivosAsync()
+        public async Task<Ativo[]> GetAllAtivosAsync(bool includeClasseDeAtivo = false)
         {
             IQueryable<Ativo> query = _context.Ativos;
+
+            if (includeClasseDeAtivo)
+                query = query.Include(a => a.ClasseDeAtivo);
 
             query = query.AsNoTracking()
                          .OrderBy(a => a.Id);
@@ -47,9 +53,18 @@ namespace Investimento.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public Task<Ativo[]> GetAllAtivosByClasseDeAtivoId()
+        public async Task<Ativo[]> GetAllAtivosByClasseDeAtivoId(int classeDeAtivoId, bool includeClasseDeAtivo = false)
         {
-            throw new NotImplementedException();
+            IQueryable<Ativo> query = _context.Ativos;
+
+            if (includeClasseDeAtivo)
+                query = query.Include(cAtivo => cAtivo.ClasseDeAtivo);
+
+            query = query.AsNoTracking()
+                         .OrderBy(a => a.Id)
+                         .Where(a => a.ClasseDeAtivoId == classeDeAtivoId);
+
+            return await query.ToArrayAsync();
         }
     }
 }

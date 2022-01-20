@@ -8,9 +8,9 @@ namespace Investimento.Domain.Interfaces.Repositories
 {
     public interface IClienteRepo : IGeralRepo
     {
-        Task<Cliente[]> GetAllClientesAsync(bool includeAtivos = false);  
-        Task<Cliente[]> GetAllClientesByAtivoId(int ativoId, bool includeAtivos = false);      
-        Task<Cliente> GetClienteByIdAsync(int id, bool includeAtivos = false);
+        Task<Cliente[]> GetAllClientesAsync(bool includeCorretora = false);  
+        Task<Cliente[]> GetAllClientesByCorretoraId(int corretoraId, bool includeCorretora = false);      
+        Task<Cliente> GetClienteByIdAsync(int id, bool includeCorretora = false);
         Task<Cliente> GetClienteByDescricaoAsync(string descricao);
     }
 }
