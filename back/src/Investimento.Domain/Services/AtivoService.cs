@@ -99,7 +99,7 @@ namespace Investimento.Domain.Services
         {
             try
             {
-                var ativos = await _ativoRepo.GetAllAtivosAsync();
+                var ativos = await _ativoRepo.GetAllAtivosAsync(true);
 
                 if (ativos == null) return null;
 

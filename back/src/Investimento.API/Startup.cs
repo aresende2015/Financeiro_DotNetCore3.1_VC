@@ -37,9 +37,13 @@ namespace Investimento.API
 
             services.AddScoped<IClasseDeAtivoRepo, ClasseDeAtivoRepo>();
             services.AddScoped<IAtivoRepo, AtivoRepo>();
+            services.AddScoped<IClienteRepo, ClienteRepo>();
+
             services.AddScoped<IGeralRepo, GeralRepo>();
+
             services.AddScoped<IClasseDeAtivoService, ClasseDeAtivoService>();
             services.AddScoped<IAtivoService, AtivoService>();
+            services.AddScoped<IClienteService, ClienteService>();
 
             services.AddControllers()
                     .AddNewtonsoftJson(
