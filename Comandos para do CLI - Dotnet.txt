@@ -50,7 +50,7 @@ dotnet tool install --global dotnet-EF
 
 
 - Instalar no projeto o EF Sqlite
-dotnet add package Microsoft.EntityFrameworkCore.SQLit
+dotnet add package Microsoft.EntityFrameworkCore.SQLite
 
 
 - Para criar nossas migrations do EntityFrameworkCore, rodar dentro da pasta da solução
