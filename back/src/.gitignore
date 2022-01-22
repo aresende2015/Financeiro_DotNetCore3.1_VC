@@ -456,3 +456,6 @@ $RECYCLE.BIN/
 *.db
 Migrations/
 Migrations/*
+
+bin/
+bin/*
