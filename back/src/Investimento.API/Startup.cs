@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using Investimento.Data.Context;
 using Investimento.Data.Repositories;
 using Investimento.Domain.Interfaces.Repositories;
@@ -16,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace Investimento.API
 {
@@ -35,6 +39,14 @@ namespace Investimento.API
                 context => context.UseSqlite(_configuration.GetConnectionString("Default"))
             );
 
+            services.AddControllers()
+                .AddNewtonsoftJson(
+                    opt => opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddScoped<IClasseDeAtivoRepo, ClasseDeAtivoRepo>();
             services.AddScoped<IAtivoRepo, AtivoRepo>();
             services.AddScoped<IClienteRepo, ClienteRepo>();
@@ -44,17 +56,23 @@ namespace Investimento.API
             services.AddScoped<IClasseDeAtivoService, ClasseDeAtivoService>();
             services.AddScoped<IAtivoService, AtivoService>();
             services.AddScoped<IClienteService, ClienteService>();
-
-            services.AddControllers()
-                    .AddNewtonsoftJson(
-                        opt => opt.SerializerSettings.ReferenceLoopHandling =
-                           Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                    );
                     
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Investimento.API", Version = "v1" });
-            // });
+             services.AddSwaggerGen(options =>
+             {
+                options.SwaggerDoc(
+                     "v1", 
+                     new OpenApiInfo 
+                        { 
+                            Title = "Investimento API", 
+                            Version = "1.0" 
+                        }
+                );
+
+                var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlCommentsFilePath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
+
+                options.IncludeXmlComments(xmlCommentsFilePath);
+             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,8 +81,11 @@ namespace Investimento.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                // app.UseSwagger();
-                // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Investimento.API v1"));
+                app.UseSwagger();
+                app.UseSwaggerUI(options => {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Investimento.API v1");
+                    options.RoutePrefix = "";
+                });
             }
 
             app.UseHttpsRedirection();

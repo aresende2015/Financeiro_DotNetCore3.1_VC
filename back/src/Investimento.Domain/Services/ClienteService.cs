@@ -21,8 +21,8 @@ namespace Investimento.Domain.Services
             if (model.Inativo)
                 throw new Exception("Não é possível incluir um Cliente já inativo.");
 
-            if (await _clienteRepo.GetClienteByDescricaoAsync(model.Descricao) != null)
-                throw new Exception("Já existe um Cliente com essa descrição.");
+            if (await _clienteRepo.GetClienteByCpfAsync(model.Cpf) != null)
+                throw new Exception("Já existe um Cliente com esse CPF.");
 
             if( await _clienteRepo.GetClienteByIdAsync(model.Id) == null)
             {

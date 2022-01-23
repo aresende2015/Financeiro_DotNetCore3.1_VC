@@ -25,6 +25,7 @@ namespace Investimento.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new AtivoMap());
+            builder.ApplyConfiguration(new ClienteMap());
             builder.ApplyConfiguration(new ClasseDeAtivoMap());
             builder.ApplyConfiguration(new ClienteCorretoraMap());
 
@@ -57,8 +58,8 @@ namespace Investimento.Data.Context
                 builder.Entity<Cliente>()
                 .HasData(
                     new List<Cliente>(){
-                        new Cliente(1, "Alex "),
-                        new Cliente(2, "Caio ")
+                        new Cliente(1, "012345678900", "Alex", "Resende", DateTime.Parse("01/01/1980")),
+                        new Cliente(2, "987654321000", "Caio", "Silva", DateTime.Parse("01/01/2010"))
                     }
                 );
 

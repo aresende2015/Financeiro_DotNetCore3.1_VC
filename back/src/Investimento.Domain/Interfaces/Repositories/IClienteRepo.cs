@@ -11,6 +11,6 @@ namespace Investimento.Domain.Interfaces.Repositories
         Task<Cliente[]> GetAllClientesAsync(bool includeCorretora = false);  
         Task<Cliente[]> GetAllClientesByCorretoraId(int corretoraId, bool includeCorretora = false);      
         Task<Cliente> GetClienteByIdAsync(int id, bool includeCorretora = false);
-        Task<Cliente> GetClienteByDescricaoAsync(string descricao);
+        Task<Cliente> GetClienteByCpfAsync(string cpf);
     }
 }

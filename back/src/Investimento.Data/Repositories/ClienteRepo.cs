@@ -46,14 +46,14 @@ namespace Investimento.Data.Repositories
             return await query.ToArrayAsync();
         }
 
-        public async Task<Cliente> GetClienteByDescricaoAsync(string descricao)
+        public async Task<Cliente> GetClienteByCpfAsync(string cpf)
         {
             IQueryable<Cliente> query = _context.Clientes;
 
             query = query.AsNoTracking()
-                         .OrderBy(c => c.Descricao);
+                         .OrderBy(c => c.Cpf);
 
-            return await query.FirstOrDefaultAsync(c => c.Descricao == descricao);
+            return await query.FirstOrDefaultAsync(c => c.Cpf == cpf);
         }
 
         public async Task<Cliente> GetClienteByIdAsync(int id, bool includeCorretora = false)

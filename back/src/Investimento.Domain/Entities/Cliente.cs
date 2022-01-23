@@ -11,11 +11,14 @@ namespace Investimento.Domain.Entities
             Inativo = false;
         }
 
-        public Cliente(int id, string descricao) 
+        public Cliente(int id, string cpf, string nome, string sobreNome, DateTime dataDeNascimento) 
         {
             Id = id;
-            Descricao = descricao;
+            Cpf = cpf;
+            Nome = nome;
+            SobreNome = sobreNome;
             DataDeCriacao = DateTime.Now;
+            DataDeNascimento = dataDeNascimento;
             Inativo = false;   
         }
 
@@ -35,13 +38,12 @@ namespace Investimento.Domain.Entities
                 throw new Exception($"O Cliente já estava ativo.");
         }
         public int Id { get; set; }
-
-        public string Descricao { get; set; }
-
+        public string Cpf { get; set; }
+        public string Nome { get; set; }
+        public string SobreNome { get; set; }
+        public DateTime DataDeNascimento { get; set; }
         public DateTime DataDeCriacao { get; set; }
-
         public bool Inativo { get; set; } 
-
         public IEnumerable<ClienteCorretora> ClientesCorretoras { get; set; }
 
     }

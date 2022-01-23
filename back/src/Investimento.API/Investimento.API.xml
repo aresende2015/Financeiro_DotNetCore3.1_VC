@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Investimento.API</name>
+    </assembly>
+    <members>
+        <member name="T:Investimento.API.Controllers.AtivoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Investimento.API.Controllers.AtivoController.#ctor(Investimento.Domain.Interfaces.Services.IAtivoService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="ativoService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Investimento.API.Controllers.AtivoController.Get">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Investimento.API.Controllers.Clientecontroller">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Investimento.API.Controllers.Clientecontroller.#ctor(Investimento.Domain.Interfaces.Services.IClienteService,AutoMapper.IMapper)">
+            <summary>
+            
+            </summary>
+            <param name="clienteService"></param>
+            <param name="mapper"></param>
+        </member>
+        <member name="M:Investimento.API.Controllers.Clientecontroller.Get">
+            <summary>
+            Método responsável para retornar todos os clientes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Investimento.API.Controllers.Clientecontroller.GetRegister">
+            <summary>
+            Método responsável para retornar um ClienteDTO vazio
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Investimento.API.Controllers.Clientecontroller.GetById(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Investimento.API.Dtos.AtivoDto">
+            <summary>
+            Dto de Ativo para mostrar o resultado do Get
+            </summary>
+        </member>
+        <member name="T:Investimento.API.Dtos.ClienteDto">
+            <summary>
+            Dto para buscar um cliente
+            </summary>
+        </member>
+        <member name="T:Investimento.API.Dtos.ClienteRegistrarDto">
+            <summary>
+            Dto para resgistrar um cliente
+            </summary>
+        </member>
+        <member name="T:Investimento.API.Helpers.DateTimeExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Investimento.API.Helpers.DateTimeExtensions.GetCurrentAge(System.DateTime)">
+            <summary>
+            
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Investimento.API.Helpers.InvestimentoProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Investimento.API.Helpers.InvestimentoProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
